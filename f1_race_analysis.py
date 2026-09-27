@@ -9,6 +9,7 @@ from matplotlib.patches import Patch
 
 PROJECT_DIR = Path(__file__).resolve().parent
 CACHE_DIR = PROJECT_DIR / ".cache" / "fastf1"
+OUTPUT_DIR = PROJECT_DIR / "output"
 
 
 def main():
@@ -93,6 +94,10 @@ def main():
         title="Team",
     )
     fig.tight_layout()
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    chart_path = OUTPUT_DIR / f"top_10_fastest_laps_{year}_{session_type}.png"
+    fig.savefig(chart_path, dpi=150, bbox_inches="tight")
+    print(f"Chart saved to: {chart_path}")
     plt.show()
 
     try:
